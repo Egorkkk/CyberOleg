@@ -19,6 +19,11 @@ shotsPath = '/mnt/VIDEO1/LUNA/FROM_CG_DAILIES/'
 os.chdir(dailiesPath)
 print dailiesPath
 
+# Define inotify function
+def watchfile():
+	f = subprocess.check_output(['inotifywait', '-r', '--format', '\'%f\'', '-e', 'create', dailiesPath])
+	return f[1:-2]
+
 # Main cycle
 while (1):
 	# Wait for new file created
